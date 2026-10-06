@@ -1,0 +1,15 @@
+feature,mean_abs_shap
+pay_ach,2.85
+unique_receivers_24h,1.26
+sender_24h_count,0.96
+pay_credit_card,0.94
+amount_paid,0.88
+sender_24h_volume,0.60
+amt_vs_7d_avg,0.60
+rapid_exit_risk,0.53
+pay_reinvestment,0.36
+pay_cheque,0.26
+pay_bitcoin,0.12
+pay_wire,0.11
+pay_cash,0.10
+is_round_1000,0.00
