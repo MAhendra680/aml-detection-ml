@@ -1,0 +1,5 @@
+rule,alerts,precision,recall
+large_amount,109510,0.0297,0.4620
+high_velocity,252499,0.0115,0.4134
+round_number,7,0.0000,0.0000
+interbank_risk,125321,0.0356,0.6333

@@ -1,0 +1,4 @@
+system,alerts,true_positives,false_positives,recall,precision,alert_rate
+Rule-based system (4 rules),301498,5506,295992,0.7814,0.0183,0.7407
+XGBoost @ threshold 0.856,17895,5312,12583,0.7539,0.2968,0.0440
+XGBoost @ same recall as rules,19804,5506,14298,0.7814,0.2780,0.0487
