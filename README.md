@@ -114,6 +114,8 @@ At threshold 0.856 the model flags 17,895 of 407,046 test transactions (4.4%). T
 **5,312 of the 7,046 laundering cases**. Its highest-scoring alerts are about 85–90% precise, which supports a
 risk-based review queue.
 
+![Precision / recall trade-off by threshold](figures/threshold_tradeoff.png)
+
 ### Model vs the rule-based system
 
 The legacy system raises an alert if any of these rules fires: amount > 10,000; more than 3 transactions in 24h;
@@ -178,8 +180,13 @@ The rebuild also fixes three methodology issues:
 │   ├── 03_train.py             # Gold: sample, split, 5 models, MLflow, champion
 │   ├── 04_explain.py           # PR / confusion / SHAP figures, reason codes
 │   └── 05_rule_baseline.py     # Legacy rules vs model at equal recall
-├── figures/                    # Figures from the Databricks run
+├── figures/                    # Figures from the Databricks run (PR curve, confusion matrix, SHAP, comparisons)
 ├── results/                    # Result tables (CSV) from the Databricks run
+│   ├── benchmark_results.csv   # 5-model benchmark: AUPRC, ROC-AUC, threshold, recall, precision
+│   ├── rules_vs_model.csv      # Legacy rules vs XGBoost at the chosen threshold and at equal recall
+│   ├── rule_breakdown.csv      # Alerts, precision and recall for each legacy rule
+│   ├── shap_mean_abs.csv       # Global feature importance (mean |SHAP|)
+│   └── typology_counts.csv     # Laundering transactions per typology
 ├── requirements.txt
 └── LICENSE
 ```
