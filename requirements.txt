@@ -1,0 +1,9 @@
+# Installed per-notebook with %pip on Databricks serverless; listed here for reference
+xgboost
+lightgbm
+shap
+scikit-learn
+mlflow
+pandas
+matplotlib
+kaggle
