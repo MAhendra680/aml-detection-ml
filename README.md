@@ -58,6 +58,28 @@ GOLD    aml.gold.training_set · benchmark_results · test_predictions · champi
 **Stack:** Azure Databricks (serverless), Unity Catalog, Delta Lake, PySpark, MLflow, scikit-learn, XGBoost,
 LightGBM, SHAP. The notebooks run as a multi-task Databricks Job.
 
+### Orchestration: Databricks Job
+
+Notebooks `01` → `05` run as one five-task Databricks Job (`aml-detection-pipeline`) on serverless compute, with the
+job parameter `catalog=aml`. A full end-to-end run over the 31.9M transactions finished successfully in **15m 53s**:
+
+![Databricks Job run graph](figures/databricks_job_graph.png)
+
+| Task | Notebook | Duration |
+|---|---|---|
+| ingest | `01_ingest` | 1m 9s |
+| features | `02_features` | 9m 39s |
+| Train | `03_train` | 4m 6s |
+| explain | `04_explain` | 43.7s |
+| rule_baseline | `05_rule_baseline` | 12.7s |
+
+<details>
+<summary>Run timeline</summary>
+
+![Databricks Job run timeline](figures/databricks_job_timeline.png)
+
+</details>
+
 ## Data
 
 - **Source:** [IBM Transactions for Anti-Money Laundering](https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml), HI-Medium split.
@@ -180,7 +202,7 @@ The rebuild also fixes three methodology issues:
 │   ├── 03_train.py             # Gold: sample, split, 5 models, MLflow, champion
 │   ├── 04_explain.py           # PR / confusion / SHAP figures, reason codes
 │   └── 05_rule_baseline.py     # Legacy rules vs model at equal recall
-├── figures/                    # Figures from the Databricks run (PR curve, confusion matrix, SHAP, comparisons)
+├── figures/                    # Figures from the Databricks run (PR curve, confusion matrix, SHAP, comparisons, Job run)
 ├── results/                    # Result tables (CSV) from the Databricks run
 │   ├── benchmark_results.csv   # 5-model benchmark: AUPRC, ROC-AUC, threshold, recall, precision
 │   ├── rules_vs_model.csv      # Legacy rules vs XGBoost at the chosen threshold and at equal recall
@@ -196,7 +218,7 @@ The rebuild also fixes three methodology issues:
 1. Create an Azure Databricks workspace (Premium, serverless) with Unity Catalog.
 2. In Databricks, go to **Workspace → Create → Git folder** and point it at this repo, or import the `.py` files.
 3. Run `00_download` with your Kaggle username and API key in the widgets.
-4. Run `01` → `05` on Serverless, or create a **Job** with five notebook tasks in sequence and a job parameter `catalog=aml`.
+4. Run `01` → `05` on Serverless, or create a **Job** with five notebook tasks in sequence and a job parameter `catalog=aml` (about 16 minutes end to end).
 5. Results appear in Unity Catalog (`aml.gold.*`) and under **Experiments → aml-detection** in MLflow.
 
 The PySpark features were checked against the original pandas logic and match exactly, except for
