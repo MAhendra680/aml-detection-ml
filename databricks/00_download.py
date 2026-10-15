@@ -60,4 +60,4 @@ for z in glob.glob(f"{DEST}/*.zip"):
     subprocess.run(["unzip", "-o", z, "-d", DEST], check=True)
     os.remove(z)
 
-display(dbutils.fs.ls(DEST))
+display(dbutils.fs.ls(DEST)) 
