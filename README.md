@@ -10,7 +10,7 @@ SHAP reason codes for every alert, and a comparison against a traditional rule-b
 > **Scope.** This is an academic study on the *synthetic* IBM AMLworld dataset. It is not a deployed counter-fraud
 > system. The results show that the method works, not how it would perform on a real bank's data.
 
---- 
+---  
 
 ## Headline results
 
